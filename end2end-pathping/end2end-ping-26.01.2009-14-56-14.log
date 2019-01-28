@@ -1,0 +1,14 @@
+26.01.2009 14:56:14,Out0,end2end-ping: gestartet
+26.01.2009 14:56:14,Out0,Pause zwischen zwei Pings :1000
+26.01.2009 14:56:14,Out0,Maximal tolerierte Abweichung:500
+26.01.2009 14:56:14,Out0,end2end-ping:Initialize Eventlog Writer
+26.01.2009 14:56:14,Out0,end2end-ping:Initialize Logfile
+26.01.2009 14:56:14,Out0,:Start Pinging
+26.01.2009 14:56:15,Dbg4,end2end-ping: www.google.de(66.249.91.104) is responding
+Bytes = 32	Time (ms)= 21	TTL (s)=246
+26.01.2009 14:56:16,Dbg4,end2end-ping: www.google.de(66.249.91.104) is responding
+Bytes = 32	Time (ms)= 21	TTL (s)=246
+26.01.2009 14:56:16,Inf3,end2end-ping: TTL:21	Average value=21
+26.01.2009 14:56:17,Dbg4,end2end-ping: www.google.de(66.249.91.104) is responding
+Bytes = 32	Time (ms)= 21	TTL (s)=246
+26.01.2009 14:56:17,Inf3,end2end-ping: TTL:21	Average value=21

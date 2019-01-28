@@ -1,0 +1,2 @@
+timestamp,status,duration,url,Message
+28.03.2018 14:57:42,Fail,481,https://www.netatwork.de/loadbalancertest.html,Ausnahme beim Aufrufen von "DownloadString" mit 1 Argument(en):  "Der Remoteserver hat einen Fehler zurückgegeben: (404) Nicht gefunden."

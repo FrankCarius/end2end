@@ -1,0 +1,43 @@
+08.05.2006 16:10:50,Out0,MailboxPerfmon: gestartet
+08.05.2006 16:10:50,Dbg5,MailboxPerfmon: XML-Writer initialisiert
+08.05.2006 16:10:50,Out0,User:cn=user1,ou=test,dc=msxfaq,dc=local
+08.05.2006 16:10:51,Out0,Mailbox :USER1@msxfaq.local
+08.05.2006 16:10:51,Out0,Homeserver:SRV01
+08.05.2006 16:10:51,Inf3,Create MAPI Session
+08.05.2006 16:10:51,Out0,  Logon to mailbox USER1@msxfaq.local
+08.05.2006 16:10:51,Inf3,Logon to Mailbox
+08.05.2006 16:10:51,Inf3,  Get Top Level folder
+08.05.2006 16:10:51,Out0,Mailbox successful opened - Checking Folders
+08.05.2006 16:10:51,Inf3,  Mailbox successful opened - Checking Folders
+08.05.2006 16:10:51,Dbg5,Checking folder Top of Information Store
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store...
+08.05.2006 16:10:52,Dbg5,Checking folder Aufgaben
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Aufgaben...
+08.05.2006 16:10:52,Dbg5,Checking folder Entwürfe
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Entwürfe...
+08.05.2006 16:10:52,Dbg5,Checking folder Gelöschte Objekte
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Gelöschte Objekte...
+08.05.2006 16:10:52,Dbg5,Checking folder Gesendete Objekte
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Gesendete Objekte...
+08.05.2006 16:10:52,Dbg5,Checking folder Journal
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Journal...
+08.05.2006 16:10:52,Dbg5,Checking folder Junk-E-Mail
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Junk-E-Mail...
+08.05.2006 16:10:52,Dbg5,Checking folder Kalender
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Kalender...
+08.05.2006 16:10:52,Dbg5,Checking folder Kontakte
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Kontakte...
+08.05.2006 16:10:52,Dbg5,Checking folder Notizen
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Notizen...
+08.05.2006 16:10:52,Dbg5,Checking folder Postausgang
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Postausgang...
+08.05.2006 16:10:52,Dbg5,Checking folder Posteingang
+08.05.2006 16:10:52,Dbg4,- \\Top of Information Store\Posteingang...
+08.05.2006 16:10:52,Out0, Done - Cleanup
+08.05.2006 16:10:52,Out0,Logoff from Mailbox 
+08.05.2006 16:10:52,Inf3,  Logoff from Mailbox 
+08.05.2006 16:10:52,Out0,Logoff complete, Releasing MAPI Session
+08.05.2006 16:10:52,Inf3,  Logoff complete, Releasing MAPI Session
+08.05.2006 16:10:52,Out0,MAPI-Session released
+08.05.2006 16:10:52,Inf3,  MAPI-Session released
+08.05.2006 16:10:52,Out0,User:cn=user2ö\, t,ou=test,dc=msxfaq,dc=local

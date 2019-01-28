@@ -1,0 +1,7 @@
+24.07.2010 15:14:43,Out0,end2end-file: gestartet
+24.07.2010 15:14:46,Out0,end2end-file: Pause zwischen zwei Writes :100
+24.07.2010 15:14:46,Out0,end2end-file: Testdateigroesse           :1024
+24.07.2010 15:14:47,Out0,end2end-file: Maximal tolerierte ms Delta:1000
+24.07.2010 15:14:47,Out0,end2end-file: Initialize Buffer START
+24.07.2010 15:14:48,Out0,end2end-file: Initialize Eventlog Writer
+24.07.2010 15:14:48,Out0,end2end-file: Start Writing

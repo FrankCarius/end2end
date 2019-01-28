@@ -1,0 +1,5 @@
+timestamp,status,duration,avg10,url,httpstatuscode,httpbytes
+11.01.2018 09:37:57,OK,215,215,https://outlook.office365.com/owa/favicon.ico,200,7886
+11.01.2018 09:37:59,OK,221,216,https://outlook.office365.com/owa/favicon.ico,200,7886
+11.01.2018 09:38:00,OK,247,219,https://outlook.office365.com/owa/favicon.ico,200,7886
+11.01.2018 09:38:01,OK,284,226,https://outlook.office365.com/owa/favicon.ico,200,7886

@@ -1,0 +1,10 @@
+24.07.2010 21:43:51,Out0,end2end-file: gestartet
+24.07.2010 21:43:51,Out0,end2end-file: testfile  :.\end2end-file.tmp
+24.07.2010 21:43:51,Out0,end2end-file: reportfile:.\end2end-file.csv
+24.07.2010 21:43:51,Out0,end2end-file: idletime  :100
+24.07.2010 21:43:51,Out0,end2end-file: buffersize:1024
+24.07.2010 21:43:51,Out0,end2end-file: alarmdelta:1000
+24.07.2010 21:43:51,Out0,end2end-file: Initialize Buffer START
+24.07.2010 21:43:51,Out0,end2end-file: Initialize Eventlog Writer
+24.07.2010 21:43:51,Out0,:Initialize Logfile
+24.07.2010 21:43:51,Out0,end2end-file: Start Writing

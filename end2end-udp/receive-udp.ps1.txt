@@ -1,0 +1,112 @@
+# receive-udp
+#
+# Start a UDP-Listener on a given Ip:Port and wait for packets
+
+param (
+	[int]$listenport = 50009,
+	[long]$maxlatency = 100,  # max allowed latency
+	[boolean]$debug = $false
+)
+
+set-psdebug -strict
+$error.clear()
+
+write-host "send-udp:Waiting for Packet"
+write-host "send-udp:ListenUDPPort: $($listenport)"
+write-host "send-udp:maxlatency   : $($maxlatency)"
+
+$lastpacket=@{}
+
+try {
+	Write-host "Receive-UDP:Start"
+	$udpClient = New-Object system.Net.Sockets.Udpclient($listenport)
+	$RemoteIpEndPoint = New-Object System.Net.IPEndPoint([system.net.IPAddress]::Parse("0.0.0.0") , 0);
+	Write-host "Receive-UDP:Wait for Data on Port: $listenport"
+	$count = 0
+	while ($true) {
+		$count++
+		if (($count%100) -eq 0) {
+			Write-host "Pakets received $($count)"
+			$lastpacket.values 
+		}
+		[string]$reportinfo = ""
+		# wait for data arriving from any ip. Alternativ kann man eine Liste der erlaubten IPs angeben
+		$data= $udpclient.receive([ref]$RemoteIpEndPoint)
+		
+		#Collect Timestamp
+		$receivetimestamp = get-date -format o
+		$receivetimestampdt = get-date $receivetimestamp
+		
+		# split payload to get values
+		[string]$payload= ([string]::join("",([System.Text.Encoding]::ASCII.GetChars($data))))
+		$Sender = "$($RemoteIpEndPoint.Address.IPAddressToString):$($RemoteIpEndPoint.Port)" 
+		$sendertimestamp = $payload.split(",")[0]
+		$sendertimestampdt = get-date $sendertimestamp
+		[long]$senderusn = $payload.split(",")[1]
+
+		# Add Entry to Hash table, if not exisiting
+		if (!$lastpacket.item($sender)) {
+			write-host "  New Partner found from $($sender)"
+			$lastpacket[$sender]= [pscustomobject][ordered]@{
+					sender = [string]$sender
+					timestamp = [string]$sendertimestamp
+					timestampdt = (get-date $sendertimestamp).addmilliseconds(-1)
+					lastusn = 0 
+					Missed = [long]0
+					last = [long]0
+					OutOfOrder = [long]0
+					received = [long]0
+					sumlatency = [long]0
+			}
+		}
+		$lastpacket[$sender].received++
+
+		if ($senderusn -gt ($lastpacket[$sender].lastusn + 1)) {
+			write-host "Missed Packet from $($sender)  SenderUSN:$($senderusn)   LastpaketUSN $($lastpacket[$sender].lastusn)"
+			[string]$reportinfo = "Missed Packet from $($sender)  SenderUSN:$($senderusn)   LastpaketUSN $($lastpacket[$sender].lastusn)"
+			$lastpacket[$sender].lastusn = $senderusn
+			$lastpacket[$sender].Missed++
+		}
+		elseif ($senderusn -lt ($lastpacket[$sender].lastusn + 1)) {
+			write-host "OutOfOrder Packet from $($sender)  SenderUSN:$($senderusn)   LastpaketUSN $($lastpacket[$sender].lastusn)"
+			[string]$reportinfo = "OutOfOrder Packet from $($sender)  SenderUSN:$($senderusn)   LastpaketUSN $($lastpacket[$sender].lastusn)"
+			$lastpacket[$sender].OutOfOrder++
+		}
+		else {
+			# packet in order.
+			$lastpacket[$sender].lastusn = $senderusn
+
+			# oneway time. depends on accurate time on sender and recipient
+			$onewaytime =(get-date $sendertimestamp) - $receivetimestampdt
+
+			#Timegap between current and former packet
+			$latency = ($sendertimestampdt - $lastpacket[$sender].timestampdt).totalmilliseconds
+			$lastpacket[$sender].sumlatency+=$latency
+			
+			if ($latency -gt $maxlatency ) {
+				write-host "Later than maxlatency Packet from $($sender) $($latency) MaxLatency=$($maxlatency)"
+				[string]$reportinfo =  "Later than maxlatency Packet from $($sender) $($latency) MaxLatency=$($maxlatency)"
+			}
+			else {
+				# latency OK
+				$lastpacket[$sender].timestampdt = $sendertimestampdt
+			}
+		}
+
+		if ($reportinfo -ne "") {
+			write-host "Warnung $($reportinfo)"
+			$lastpacket.values 
+		}
+		# send structured Data to pipeline
+	}
+}
+catch {
+	write-host "Receive-UDP:Error occured $error"
+	$error
+}
+
+finally {
+	write-host "Receive-UDP:Closing"
+	$udpclient.close()
+	Write-host "Receive-UDP:End"
+}

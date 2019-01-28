@@ -1,0 +1,63 @@
+Option Explicit
+'-------------------------------------------------------------------------
+' Disktest 1.1
+'
+' Beschreibung
+' Schreibt 10 MByte Dateien und misst die Zeit als Dauertest für Performance
+'
+' Vorgehensweise
+' - Initialisiert einen String mit 100k Größe und schreibt diesen auf die Festplatte
+'
+' Voraussetzung
+' - Schreibrechte im Zielverzeichnis
+'
+' Achtung: Das Skript kann nur mit CTRL-C abgebrochen werden und muss dann 
+'
+' Version 1.0 ( 19. Mrz 2007)
+'	Erste Version
+' Version 1.0 ( 25. Mrz 2007)
+'	Ausgabe der Daten als CSV-Datei. Auswertung mit Excel o.ae moeglich
+'-------------------------------------------------------------------------
+
+
+Const ForWriting = 2
+
+dim str100k,  count
+
+dim Testfilename
+'~ testfilename = wscript.arguments.named("file")
+'if testfilename  = "" then testfilename = "disktest.tmp"
+testfilename = "disktest.tmp"
+
+'~ dim maxsize
+'~ maxsize = wscript.arguments.named("maxsize")
+'~ if maxsize = "" then maxsize = 0 
+
+wscript.echo  now() & ":Initialize 10 Mbyte Buffer START"
+str100k = "--This is a 100kbyte Testfile for testing hard disk, network and SAN thoughput. It can be deleted --" & space (99900)
+wscript.echo  now() & ":Initialize 10 Mbyte Buffer DONE"
+
+wscript.echo "Please press ENTER to start writing Testfiles"
+wscript.echo "To stop that script, press CTRL-C"
+wscript.echo "YOU HAVE TO REMOVE THE TEMPORARY TEST FILE MANUALLY !"
+wscript.stdin.readline
+
+dim fs, file, dtstart, logfile
+Set fs = CreateObject("Scripting.FileSystemObject")
+Set logfile = fs.OpenTextFile("disktest.csv", ForWriting, True)
+logfile.writeline "zeitpunkt;durchsatz"
+
+wscript.echo  now() & ":Start Writing"
+dtstart = now
+do 
+loop until datediff("s",dtstart,now) > 0  ' Wait for next "full" second
+do
+	dtstart = now : count = 0
+	Set file = fs.OpenTextFile(testfilename, ForWriting, True)
+	do
+		file.Write(str100k) : count = count + 1
+	loop until datediff("s",dtstart,now) > 0
+	file.close
+	wscript.echo now & " " & formatnumber(count/10,1,-1) & "Mb/Sek " & replace(space(count/50)," ","#")
+	logfile.writeline now & ";" & count/10
+loop
